@@ -34,3 +34,47 @@ xiaoming.doHomework()
 print(xiaoming.__dict__)
 # 类的所有成员
 print(PythonStudents.__dict__)
+
+# self非绑定类方法和绑定类方法
+class Teacher():
+    name = "nana"
+    age = 18
+    def say(self):
+        print(self.name)
+        print(self.age)
+        # 获取类的属性
+        print(__class__.name)
+
+t =Teacher()
+t.name = "lalal"
+t.say()
+
+class B():
+    name = 'aaa'
+    age = 20
+
+t =Teacher()
+# 此处默认将t 替换self
+t.say()
+# 此处t代替self
+Teacher.say(t)
+# 此处因B类中也有name和age属性，说以可以使用，称为鸭子模型
+b =B()
+Teacher.say(b)
+
+
+class Person():
+    # name是共有成员
+    name = "xiaoli"
+    # __age就是私有成员
+    __age = 18
+
+
+p = Person()
+# 正常访问，有输出
+print(p.name)
+# 出错，没输出
+# print(p.__age)
+# 正常访问有输出
+print(p._Person__age)
+
